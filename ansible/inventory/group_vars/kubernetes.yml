@@ -1,0 +1,25 @@
+ansible_user: ansible
+ansible_become: true
+ansible_become_method: sudo
+ansible_ssh_private_key_file: "{{ lookup('env','HOME') + '/.ssh/devops2026' }}"
+
+common_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - software-properties-common
+  - bash-completion
+  - vim
+  - git
+  - jq
+
+kernel_modules:
+  - br_netfilter
+  - overlay
+
+sysctl_settings:
+  net.bridge.bridge-nf-call-iptables: 1
+  net.bridge.bridge-nf-call-ip6tables: 1
+  net.ipv4.ip_forward: 1
