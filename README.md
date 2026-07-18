@@ -1,17 +1,38 @@
-# Devops - 2026
+# Project Devops 2026
 
-Production grade Devops platform built using :
+Production Kubernetes Platform built with
 
-os - fedora44 - workstation
-kvm
-kubernetes
-docker
-helm
-argocd
-github actions
-prometheus
-grafana
-loki
-terraform
-ansible
-python
+- Ansible
+- Debian 12
+- containerd
+- Kubernetes
+- Cilium
+- Prometheus
+- Grafana
+- ArgoCD
+
+## Architecture
+
+Fedora
+   │
+Ansible
+   │
+──────────────
+│     │     │
+CP   W1    W2
+
+## Repository Layout
+
+...
+
+## Prerequisites
+
+...
+
+## Quick Start
+
+...
+
+## Roadmap
+
+...

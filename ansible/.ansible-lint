@@ -1,0 +1,9 @@
+---
+profile: production
+
+exclude_paths:
+  - .git/
+  - .github/
+  - roles/*/tests/
+
+use_default_rules: true

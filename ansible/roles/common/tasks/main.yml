@@ -1,9 +1,14 @@
-#SPDX-License-Identifier: MIT-0
+# SPDX-License-Identifier: MIT-0
 ---
 # tasks file for roles/common
 
-- import_tasks: update.yml
-- import_tasks: packages.yml
-- import_tasks: swap.yml
-- import_tasks: kernel.yml
-- import_tasks: sysctl.yml
+- name: Update
+  ansible.builtin.import_tasks: update.yml
+- name: Install packages
+  ansible.builtin.import_tasks: packages.yml
+- name: Disable swap
+  ansible.builtin.import_tasks: swap.yml
+- name: Configure kernel parameters
+  ansible.builtin.import_tasks: kernel.yml
+- name: Configure sysctl settings
+  ansible.builtin.import_tasks: sysctl.yml

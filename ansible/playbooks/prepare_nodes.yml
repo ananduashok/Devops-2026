@@ -1,3 +1,4 @@
+---
 - name: Prepare Kubernetes nodes
   hosts: kubernetes
   become: true

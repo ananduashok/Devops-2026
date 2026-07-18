@@ -5,28 +5,28 @@
 
   tasks:
     - name: Update apt cache
-      apt:
-        update_cache: yes
+      ansible.builtin.apt:
+        update_cache: true
 
     - name: Install sudo
-      apt:
+      ansible.builtin.apt:
         name: sudo
         state: present
 
     - name: Ensure ansible user exists
-      user:
+      ansible.builtin.user:
         name: ansible
         shell: /bin/bash
         state: present
 
     - name: Add ansible user to sudo group
-      user:
+      ansible.builtin.user:
         name: ansible
         groups: sudo
-        append: yes
+        append: true
 
     - name: Allow passwordless sudo
-      copy:
+      ansible.builtin.copy:
         dest: /etc/sudoers.d/ansible
         content: |
           ansible ALL=(ALL) NOPASSWD:ALL
@@ -35,7 +35,7 @@
         mode: "0440"
 
     - name: Create .ssh directory
-      file:
+      ansible.builtin.file:
         path: /home/ansible/.ssh
         state: directory
         owner: ansible
@@ -43,7 +43,7 @@
         mode: "0700"
 
     - name: Install authorized key
-      authorized_key:
+      ansible.posix.authorized_key:
         user: ansible
         state: present
-        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/devops2026.pub') }}"
+        key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/devops2026.pub') }}"
