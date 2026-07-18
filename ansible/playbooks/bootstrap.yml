@@ -1,0 +1,49 @@
+---
+- name: Bootstrap Debian servers
+  hosts: kubernetes
+  become: false
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install sudo
+      apt:
+        name: sudo
+        state: present
+
+    - name: Ensure ansible user exists
+      user:
+        name: ansible
+        shell: /bin/bash
+        state: present
+
+    - name: Add ansible user to sudo group
+      user:
+        name: ansible
+        groups: sudo
+        append: yes
+
+    - name: Allow passwordless sudo
+      copy:
+        dest: /etc/sudoers.d/ansible
+        content: |
+          ansible ALL=(ALL) NOPASSWD:ALL
+        owner: root
+        group: root
+        mode: "0440"
+
+    - name: Create .ssh directory
+      file:
+        path: /home/ansible/.ssh
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: "0700"
+
+    - name: Install authorized key
+      authorized_key:
+        user: ansible
+        state: present
+        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/devops2026.pub') }}"
