@@ -1,0 +1,5 @@
+---
+- name: Install containerd
+  ansible.builtin.apt:
+    name: "{{ containerd_package }}"
+    state: present

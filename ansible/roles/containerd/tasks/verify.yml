@@ -1,0 +1,10 @@
+---
+- name: Collect service facts
+  ansible.builtin.service_facts:
+
+- name: Verify containerd service is running
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.services["containerd.service"].state == "running"
+    fail_msg: "containerd service is not running."
+    success_msg: "containerd service is running."
