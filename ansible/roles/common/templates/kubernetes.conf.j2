@@ -1,0 +1,5 @@
+# managed by ansible, do not edit manually
+
+{% for item in sysctl_settings | dict2items %}
+{{ item.key }} = {{ item.value }}
+{% endfor %}

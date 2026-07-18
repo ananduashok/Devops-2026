@@ -1,9 +1,9 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for roles/common
-- name: Show common packages to be installed
-  debug:
-    var: common_packages
 
 - import_tasks: update.yml
 - import_tasks: packages.yml
+- import_tasks: swap.yml
+- import_tasks: kernel.yml
+- import_tasks: sysctl.yml

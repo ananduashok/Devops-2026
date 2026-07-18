@@ -1,0 +1,16 @@
+- name: configure kernel modules
+  block:
+
+    - name: load required kernel modules
+      community.general.modprobe:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ kernel_modules }}"
+
+    - name: persist kernel modules
+      ansible.builtin.template:
+        src: modules-load.conf.j2
+        dest: /etc/modules-load.d/kubernetes.conf
+        owner: root
+        group: root
+        mode: "0644"

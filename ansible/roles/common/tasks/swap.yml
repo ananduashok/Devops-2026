@@ -1,0 +1,17 @@
+- name: Disable swap
+  block:
+
+    - name: check for active swap
+      ansible.builtin.command: swapon --show --noheadings
+      register: swap_status
+      changed_when: false
+      
+    - name: Disable swap if active
+      ansible.builtin.command: swapoff -a
+      when: swap_status.stdout != ""
+
+    - name: comment out swap entry in /etc/fstab
+      ansible.builtin.replace:
+        path: /etc/fstab
+        regexp: '^(.*\sswap\s+.*)$'
+        replace: '# \1'
