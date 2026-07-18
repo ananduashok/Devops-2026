@@ -1,0 +1,12 @@
+---
+- name: Configure Kubernetes repository
+  ansible.builtin.import_tasks: repository.yml
+
+- name: Install Kubernetes packages
+  ansible.builtin.import_tasks: install.yml
+
+- name: Configure kubelet
+  ansible.builtin.import_tasks: service.yml
+
+- name: Verify Kubernetes installation
+  ansible.builtin.import_tasks: verify.yml

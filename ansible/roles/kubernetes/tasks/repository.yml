@@ -1,0 +1,23 @@
+---
+- name: Create APT keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Download Kubernetes repository GPG key
+  ansible.builtin.get_url:
+    url: "{{ kubernetes_gpg_url }}"
+    dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Add Kubernetes repository
+  ansible.builtin.apt_repository:
+    repo: "{{ kubernetes_repository }}"
+    filename: kubernetes
+    state: present
+    update_cache: true

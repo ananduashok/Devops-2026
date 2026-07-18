@@ -1,0 +1,25 @@
+---
+- name: Verify kubeadm installation
+  ansible.builtin.command:
+    cmd: kubeadm version
+  register: kubernetes_kubeadm_version
+  changed_when: false
+
+- name: Verify kubectl installation
+  ansible.builtin.command:
+    cmd: kubectl version --client
+  register: kubernetes_kubectl_version
+  changed_when: false
+
+- name: Verify kubelet installation
+  ansible.builtin.command:
+    cmd: kubelet --version
+  register: kubernetes_kubelet_version
+  changed_when: false
+
+- name: Display installed versions
+  ansible.builtin.debug:
+    msg:
+      - "{{ kubernetes_kubeadm_version.stdout }}"
+      - "{{ kubernetes_kubectl_version.stdout }}"
+      - "{{ kubernetes_kubelet_version.stdout }}"

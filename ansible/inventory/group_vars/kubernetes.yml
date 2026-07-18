@@ -37,3 +37,22 @@ docker_repository: >-
   {{ ansible_facts['distribution_release'] }} stable
 
 docker_gpg_url: https://download.docker.com/linux/debian/gpg
+
+########################################
+# Kubernetes
+########################################
+
+kubernetes_version: "v1.34"
+
+kubernetes_packages:
+  - kubeadm
+  - kubelet
+  - kubectl
+
+kubernetes_repository: >-
+  deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc]
+  https://pkgs.k8s.io/core:/stable:/{{ kubernetes_version }}/deb/
+  /
+
+kubernetes_gpg_url: >-
+  https://pkgs.k8s.io/core:/stable:/{{ kubernetes_version }}/deb/Release.key
